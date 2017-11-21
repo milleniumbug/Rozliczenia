@@ -13,7 +13,10 @@ namespace RozliczeniaXamarin
 		{
 			InitializeComponent();
 
-			MainPage = new RozliczeniaXamarin.MainPage();
+			MainPage = new RozliczeniaXamarin.MainPage
+			{
+				BindingContext = new MainPageViewModel()
+			};
 		}
 
 		protected override void OnStart ()

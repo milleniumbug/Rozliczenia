@@ -9,9 +9,20 @@ namespace RozliczeniaXamarin
 {
 	public partial class MainPage : ContentPage
 	{
+		public static MainPageViewModel BindingContextDummyInstance => null;
+
 		public MainPage()
 		{
 			InitializeComponent();
+		}
+
+		private void OnCalculateButtonClick(object sender, EventArgs e)
+		{
+			var vm = (MainPageViewModel) BindingContext;
+			Navigation.PushModalAsync(new TransfersResultPage
+			{
+				BindingContext = vm.ProvideViewModelForCalculatedTransfers()
+			});
 		}
 	}
 }
