@@ -17,7 +17,7 @@ namespace RozliczeniaXamarin.Converters
 		    if(value == null)
 			    return null;
 		    var o = ((TransferViewModel)value).Transfer;
-		    return $"{o.From} should pay {o.MoneyAmount} to {o.To}";
+		    return $"{o.From} should pay {o.MoneyAmount:C} to {o.To}";
 	    }
 
 	    /// <inheritdoc />

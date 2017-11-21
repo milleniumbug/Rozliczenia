@@ -37,6 +37,7 @@
                                         Text="{Binding Who}" />
                                     <Entry
                                         Grid.Column="1"
+                                        Keyboard="Numeric"
                                         Placeholder="Payment amount"
                                         Text="{Binding MoneyAmount}" />
                                     <Button
@@ -49,7 +50,6 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
             </Grid>
             <Button
                 Grid.Row="1"
