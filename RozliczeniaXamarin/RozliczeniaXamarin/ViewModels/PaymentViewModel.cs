@@ -47,6 +47,8 @@ namespace RozliczeniaXamarin
 
 		public Payment Build()
 		{
+			if(string.IsNullOrWhiteSpace(Who) || string.IsNullOrWhiteSpace(MoneyAmount))
+				return null;
 			return new Payment(new Person(Who), decimal.Parse(MoneyAmount));
 		}
 

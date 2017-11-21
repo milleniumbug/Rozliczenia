@@ -21,7 +21,7 @@ namespace RozliczeniaXamarin
 		public MainPageViewModel() :
 			this(Enumerable.Empty<Payment>())
 		{
-			
+
 		}
 
 		public MainPageViewModel(IEnumerable<Payment> payments)
@@ -43,7 +43,7 @@ namespace RozliczeniaXamarin
 		public TransfersResultViewModel ProvideViewModelForCalculatedTransfers()
 		{
 			return new TransfersResultViewModel(
-				Calculator.DistributeCosts(Payments.Select(paymentVm => paymentVm.Build()).ToList()));
+				Calculator.DistributeCosts(Payments.Select(paymentVm => paymentVm.Build()).Where(payment => payment != null).ToList()));
 		}
 	}
 }
