@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FsCheck;
 using NUnit.Framework;
 using RozliczeniaXamarin.Models;
 
@@ -76,6 +78,34 @@ namespace RozliczeniaTests
 						new Payment(personB, 20.0m),
 						new Payment(personC, 0.0m)
 					}));
+		}
+
+		[Test]
+		public void EmptyInput()
+		{
+			// found by FsCheck
+			Assert.DoesNotThrow(() => RozliczeniaXamarin.Calculator.DistributeCosts(new Payment[0]));
+		}
+
+		[Test]
+		public void Fuzz()
+		{
+			Func<Payment[], bool> inputMoneyEqualsOutputMoney = payments =>
+			{
+				var input = payments.Sum(payment => payment.MoneyAmount);
+				var afterPayments = payments.ToDictionary(payment => payment.Who, payment => payment);
+				var transfers = RozliczeniaXamarin.Calculator.DistributeCosts(payments);
+				foreach(var transfer in transfers)
+				{
+					afterPayments[transfer.To] = afterPayments[transfer.To]
+						.Clone(moneyAmount: afterPayments[transfer.To].MoneyAmount + transfer.MoneyAmount);
+					afterPayments[transfer.From] = afterPayments[transfer.From]
+						.Clone(moneyAmount: afterPayments[transfer.From].MoneyAmount - transfer.MoneyAmount);
+				}
+				var output = afterPayments.Select(x => x.Value).Sum(payment => payment.MoneyAmount);
+				return input == output;
+			};
+			FsCheck.Prop.ForAll(inputMoneyEqualsOutputMoney).QuickCheckThrowOnFailure();
 		}
 	}
 }
