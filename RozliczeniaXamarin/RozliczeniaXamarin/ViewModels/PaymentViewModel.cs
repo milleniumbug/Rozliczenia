@@ -14,7 +14,7 @@ namespace RozliczeniaXamarin
 
 		public string MoneyAmount
 		{
-			get => moneyAmount;
+			get { return moneyAmount; }
 			set
 			{
 				if(value == moneyAmount) return;
@@ -25,7 +25,7 @@ namespace RozliczeniaXamarin
 
 		public string Who
 		{
-			get => who;
+			get { return who; }
 			set
 			{
 				if(value == who) return;

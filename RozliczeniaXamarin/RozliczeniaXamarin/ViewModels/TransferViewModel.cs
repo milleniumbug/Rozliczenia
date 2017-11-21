@@ -11,7 +11,7 @@ namespace RozliczeniaXamarin
 
 		public Transfer Transfer
 		{
-			get => transfer;
+			get { return transfer; }
 			set
 			{
 				if(transfer == value) return;
