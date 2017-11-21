@@ -26,8 +26,8 @@ namespace RozliczeniaXamarin
 				    needsToPay -= paymentAmount;
 				    paidTooMuch[paidTooMuchIndex] = paidTooMuch[paidTooMuchIndex].Clone(moneyAmount: paidTooMuch[paidTooMuchIndex].MoneyAmount - paymentAmount);
 					result.Add(new Transfer(
-						from: paidTooMuch[paidTooMuchIndex].Who,
-						to: payment.Who,
+						from: payment.Who,
+						to: paidTooMuch[paidTooMuchIndex].Who,
 						moneyAmount: paymentAmount
 					));
 				    if(paidTooMuch[paidTooMuchIndex].MoneyAmount == 0.0m)
